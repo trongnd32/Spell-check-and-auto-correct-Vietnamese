@@ -1,4 +1,11 @@
-#include <bits/stdc++.h>
+#include <cstring>
+#include <vector>
+#include <map>
+#include <set>
+#include <ctime>
+#include <iostream>
+#include <algorithm>
+
 #define MAXEDFIRSTCONSONANT 1
 #define MAXEDVOWEL 2
 #define MAXEDLASTCONSONANT 1
@@ -20,10 +27,10 @@ const char lastConsonantChar[5] = {'c','p','t','m','n'};
 const char tone[5] = {'s','f','r','x','j'};
 string firstConsonant[28] = {"b","c","d","dd","g","h","k","l","m","n","q","r","s","t","v","x","ch","gh","gi","kh","ng","nh","ph","qu","th","tr","ngh",""};
 string lastConsonant[9] = {"c","p","t","m","n","ch","ng","nh",""};
-string vowel[74] = {"a", "aw", "aa", "e", "ee", "i", "o", "oo", "ow", "u", "w", "uw", "y", "ai", "ao", "au", "ay", "aau", "aua", "aay", "aya", "eo", "eeu", 
-                    "eue", "ia", "iu", "iee", "oa", "oaw", "oe", "oi", "oio", "ooi", "oiw", "owi", "ua", "uaa", "ui", "uee", "uoo", "uow", "uy", "uwa", "wa",
-                    "uaw", "uiw", "uwi", "wi", "uwow", "uow", "wow", "wu", "uwu", "uuw", "yee", "oai", "oay", "uaay", "uaya", "uooi", "uoio", "ieeu", "ieue", 
-                    "uyee", "uouw", "uowu", "uwowu", "uoiw", "uowi", "uwowi", "uya", "yeeu", "yeue", "uyu"};
+const string vowel[75] = { "a", "aw", "aa", "e", "ee", "i", "o", "oo", "ow", "u", "w", "uw", "y", "ai", "ao", "au", "ay", "aau", "aua", "aay", "aya", "eo", "eeu",
+					"eue", "ia", "iu", "iee", "oa", "oaw", "oe", "oi", "ooo", "oio", "ooi", "oiw", "owi", "ua", "uaa", "ui", "uee", "uoo", "uow", "uy", "uwa", "wa",
+					"uaw", "uiw", "uwi", "wi", "uwow", "uow", "wow", "wu", "uwu", "uuw", "yee", "oai", "oay", "uaay", "uaya", "uooi", "uoio", "ieeu", "ieue",
+					"uyee", "uouw", "uowu", "uwowu", "uoiw", "uowi", "uwowi", "uya", "yeeu", "yeue", "uyu" };
 vector <char> toneNearBy[26] = {
   {'s'},              //a
   {},                 //b
@@ -82,149 +89,270 @@ vector <char> replaceChar[26] = {
   {'a','s','d','x'} //z
 };
 
+map <string, string> standardVowel = {
+  {"a", "a"},
+  {"aw", "aw"},
+  {"aa", "aa"},
+  {"e", "e"},
+  {"ee", "ee"},
+  {"i", "i"},
+  {"o", "o"},
+  {"oo", "oo"},
+  {"ow", "ow"},
+  {"u", "u"},
+  {"uw", "uw"}, {"w", "uw"},
+  {"y", "y"},
+  {"ai", "ai"},
+  {"ao", "ao"},
+  {"au", "au"},
+  {"ay", "ay"},
+  {"aau", "aau"}, {"aua", "aau"},
+  {"aay", "aay"}, {"aya", "aay"},
+  {"eo", "eo"},
+  {"eeu", "eeu"}, {"eue", "eeu"},
+  {"ia", "ia"},
+  {"iu", "iu"},
+  {"iee", "iee"},
+  {"oa", "oa"},
+  {"oaw", "oaw"},
+  {"oe", "oe"},
+  {"oi", "oi"},
+  {"ooo", "ooo"},
+  {"ooi", "ooi"}, {"oio", "ooi"},
+  {"owi", "owi"}, {"oiw", "owi"},
+  {"ua", "ua"},
+  {"uaa", "uaa"},
+  {"ui", "ui"},
+  {"uee", "uee"},
+  {"uoo", "uoo"},
+  {"uow", "uow"},
+  {"uy", "uy"},
+  {"uwa", "uwa"}, {"wa", "uwa"}, {"uaw", "uwa"},
+  {"uwi", "uwi"}, {"uiw", "uwi"}, {"wi", "uwi"},
+  {"uwow", "uwow"}, {"wow", "uwow"},
+  {"uwu", "uwu"}, {"wu", "uwu"}, {"uuw", "uwu"},
+  {"yee", "yee"},
+  {"oai", "oai"},
+  {"oay", "oay"},
+  {"uaay", "uaay"}, {"uaya", "uaay"},
+  {"uooi", "uooi"}, {"uoio", "uooi"},
+  {"ieeu", "ieeu"}, {"ieue", "ieeu"},
+  {"uyee", "uyeen"},
+  {"uwowu", "uwowu"}, {"uouw", "uwowu"}, {"uowu", "uwowu"}, 
+  {"uwowi", "uwowi"}, {"uoiw", "uwowi"}, {"uowi", "uwowi"}, 
+  {"uya", "uya"},
+  {"yeeu", "yeeu"}, {"yeue", "yeeu"},
+  {"uyu", "uyu"}
+};
+
+map <string, int> mapOfFirstConsonant = {
+	{"b", 1},
+	{"c", 2},
+	{"d", 3},
+	{"dd", 4},
+	{"g", 5},
+	{"h", 6},
+	{"k", 7},
+	{"l", 8},
+	{"m", 9},
+	{"n", 10},
+	{"q", 11},
+	{"r", 12},
+	{"s", 13},
+	{"t", 14},
+	{"v", 15},
+	{"x", 16},
+	{"ch", 17},
+	{"gh", 18},
+	{"gi", 19},
+	{"kh", 20},
+	{"ng", 21},
+	{"nh", 22},
+	{"ph", 23},
+	{"qu", 24},
+	{"th", 25},
+	{"tr", 26},
+	{"ngh", 27},
+	{"", 28}
+};
+
 map <string, int> mapOfVowel = {
-  {"a", 0},
-  {"aw", 1},
-  {"aa", 2},
-  {"e", 3},
-  {"ee", 4},
-  {"i", 5},
-  {"o", 6},
-  {"oo", 7},
-  {"ow", 8},
-  {"u", 9},
-  {"w", 10}, {"uw", 10},
-  {"y", 11},
-  {"ai", 12},
-  {"ao", 13},
-  {"au", 14},
-  {"ay", 15},
-  {"aau", 16}, {"aua", 16},
-  {"aay", 17}, {"aya", 17},
-  {"eo", 18},
-  {"eeu", 19}, {"eue", 19},
-  {"ia", 20},
-  {"iu", 21},
-  {"iee", 22},
-  {"oa", 23},
-  {"oaw", 24},
-  {"oe", 25},
-  {"oi", 26},
-  //{"oo", 27},
-  {"oio", 28}, {"ooi", 28},
-  {"oiw", 29}, {"owi", 29},
-  {"ua", 30},
-  {"uaa", 31},
-  {"ui", 32},
-  {"uee", 33},
-  {"uoo", 34},
-  {"uow", 35},
-  {"uy", 36},
-  {"uwa", 37}, {"wa", 37}, {"uaw", 37},
-  {"uiw", 38}, {"uwi", 38}, {"wi", 38},
-  {"uwow", 39}, {"wow", 39},
-  {"wu", 40}, {"uwu", 40}, {"uuw", 40},
-  {"yee", 41},
-  {"oai", 42},
-  {"oay", 43},
-  {"uaay", 44}, {"uaya", 44},
-  {"uooi", 45}, {"uoio", 45},
-  {"ieeu", 46}, {"ieue", 46},
-  {"uyee", 47},
-  {"uouw", 48}, {"uowu", 48}, {"uwowu", 48},
-  {"uoiw", 49}, {"uowi", 49}, {"uwowi", 49},
-  {"uya", 50},
-  {"yeeu", 51}, {"yeue", 51},
-  {"uyu", 52}
+  {"a", 1},
+  {"aw", 2},
+  {"aa", 3},
+  {"e", 4},
+  {"ee", 5},
+  {"i", 6},
+  {"o", 7},
+  {"oo", 8},
+  {"ow", 9},
+  {"u", 10},
+  {"uw", 11},
+  {"y", 12},
+  {"ai", 13},
+  {"ao", 14},
+  {"au", 15},
+  {"ay", 16},
+  {"aau", 17},
+  {"aay", 18},
+  {"eo", 19},
+  {"eeu", 20},
+  {"ia", 21},
+  {"iu", 22},
+  {"iee", 23},
+  {"oa", 24},
+  {"oaw", 25},
+  {"oe", 26},
+  {"oi", 27},
+  {"ooo", 28},
+  {"ooi", 29},
+  {"owi", 30},
+  {"ua", 31},
+  {"uaa", 32},
+  {"ui", 33},
+  {"uee", 34},
+  {"uoo", 35},
+  {"uow", 36},
+  {"uy", 37},
+  {"uwa", 38},
+  {"uwi", 39},
+  {"uwow", 40},
+  {"uwu", 41},
+  {"yee", 42},
+  {"oai", 43},
+  {"oay", 44},
+  {"uaay", 45},
+  {"uooi", 46},
+  {"ieeu", 47},
+  {"uyee", 48},
+  {"uwowu", 49},
+  {"uwowi", 50},
+  {"uya", 51},
+  {"yeeu", 52},
+  {"uyu", 53}
 };
 
 map <string, int> mapOfLastConsonant = {
-  {"c", 0},
-  {"p", 1},
-  {"t", 2},
-  {"m", 3},
-  {"n", 4},
-  {"ch", 5},
-  {"ng", 6},
-  {"nh", 7},
-  {"", 8}
+  {"c", 1},
+  {"p", 2},
+  {"t", 3},
+  {"m", 4},
+  {"n", 5},
+  {"ch", 6},
+  {"ng", 7},
+  {"nh", 8},
+  {"", 9}
 };
 
 map <string, int> mapOfTone = {
-  {"s", 0},
-  {"f", 1},
-  {"r", 2},
-  {"x", 3},
-  {"j", 4},
-  {"", 5}
+  {"s", 1},
+  {"f", 2},
+  {"r", 3},
+  {"x", 4},
+  {"j", 5},
+  {"", 6}
 };
 
-int combineVowelLastConsonant[53][9] = {
-  {1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 0},
-  {1, 1, 1, 1, 1, 0, 1, 0, 0},
-  {1, 1, 1, 1, 1, 1, 1, 0, 1},
-  {1, 1, 1, 1, 1, 1, 0, 1, 1},
-  {0, 1, 1, 1, 1, 1, 0, 1, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 1},
-  {1, 1, 1, 1, 1, 0, 0, 0, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 0},
-  {1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 0},
-  {0, 0, 1, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {1, 0, 0, 0, 0, 0, 1, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {1, 0, 1, 1, 1, 0, 1, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 1, 1, 1, 0, 0, 1, 1},
-  {0, 0, 1, 1, 1, 0, 1, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 1, 1, 0, 0, 1, 0, 1, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {1, 1, 1, 1, 1, 0, 1, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 1, 1, 1, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 1, 1, 1, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1},
-  {0, 0, 0, 0, 0, 0, 0, 0, 1}
+int combineVowelLastConsonant[54][10] = {
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 0},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+  {0, 1, 1, 1, 1, 1, 1, 0, 1, 1},
+  {0, 0, 1, 1, 1, 1, 1, 0, 1, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+  {0, 1, 1, 1, 1, 1, 0, 0, 0, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 0},
+  {0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 1, 0, 0, 0, 0, 0, 1, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 1, 0, 1, 1, 1, 0, 1, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 1, 1, 1, 0, 0, 1, 1},
+  {0, 0, 0, 1, 1, 1, 0, 1, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 1, 1, 0, 0, 1, 0, 1, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 1, 1, 1, 1, 1, 0, 1, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
 };
 
-int combineToneLastConsonant[6][9] = {
-  {1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {0, 0, 0, 1, 1, 0, 1, 1, 1},
-  {0, 0, 0, 1, 1, 0, 1, 1, 1},
-  {0, 0, 0, 1, 1, 0, 1, 1, 1},
-  {1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {0, 0, 0, 1, 1, 0, 1, 1, 1}
+int combineToneLastConsonant[7][10] = {
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {0, 0, 0, 0, 1, 1, 0, 1, 1, 1},
+  {0, 0, 0, 0, 1, 1, 0, 1, 1, 1},
+  {0, 0, 0, 0, 1, 1, 0, 1, 1, 1},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {0, 0, 0, 0, 1, 1, 0, 1, 1, 1}
 };
 
-int ED[10][10];
+int combineFirstConsonantVowel[29][54] = {
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+	{0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1}
+};
+
+int ED[15][15];
 
 //---------------------------------------------
 
@@ -363,20 +491,20 @@ vector <string> genNearlyVowel(string inputVowel){
   for(int i = 0; i < n; i++) {
     int edvowel = edit_distance(inputVowel, vowel[i]);
 
-    if (edvowel <= MAXEDVOWEL) res.push_back(vowel[i]);
+    if (edvowel <= MAXEDVOWEL) res.push_back(standardVowel[vowel[i]]);
     if (edvowel <= MAXEDVOWEL + 1) {
       vector < pair <int, char> > deletedChar = findDeleteChars(inputVowel, vowel[i]);
       int m = deletedChar.size();
 
       for(int k = 0; k < m; k++) {
         if (isTone(deletedChar[k].second) && deletedChar[k].first != 0) {
-          string str = vowel[i] + deletedChar[k].second;
+          string str = standardVowel[vowel[i]] + deletedChar[k].second;
           res.push_back(str);
         } else {
           if(edvowel <= MAXEDVOWEL) {
             int repToneSize = toneNearBy[deletedChar[k].second - 'a'].size();
             for (int o = 0; o < repToneSize; o++) {
-              string str = vowel[i] + toneNearBy[deletedChar[k].second - 'a'][o];
+              string str = standardVowel[vowel[i]] + toneNearBy[deletedChar[k].second - 'a'][o];
               res.push_back(str);
             }
           }
@@ -418,28 +546,51 @@ vector <string> genNearlyLastConsonant(string inputLastConsonant) {
 }
 
 bool checkValidNearlyWord(string gfconsonant, string gvowel, string glconsonant) {
-  char lastCharInVowel = *(--gvowel.end());
-  char lastCharInLastConsonant = *(--glconsonant.end());
-  if (isTone(lastCharInVowel) && isTone(lastCharInLastConsonant)) return false;
-  string newGvowel = gvowel;
-  string newGlconsonant = glconsonant;
-  string toneChar = "";
-  if (isTone(lastCharInVowel)) {
-    newGvowel.pop_back();
-    toneChar = lastCharInVowel;
-  }
-  if(isTone(lastCharInLastConsonant)) {
-    newGlconsonant.pop_back();
-    toneChar = lastCharInLastConsonant;
-  }
-  if(newGvowel.compare("uow") == 0 && newGlconsonant.length() > 0) newGvowel = "uwow";
-  int idxVowel = mapOfVowel[newGvowel];
-  int idxLastConsonant = mapOfLastConsonant[newGlconsonant];
-  int idxTone = mapOfTone[toneChar];
+  char lastCharInVowel = '0';
+	if (gvowel.length() > 0) lastCharInVowel = *(--gvowel.end());
+	char lastCharInLastConsonant = '0';
+	if (glconsonant.length() > 0) lastCharInLastConsonant = *(--glconsonant.end());
 
-  if (combineVowelLastConsonant[idxVowel][idxLastConsonant] == 0) return false;
-  if (combineToneLastConsonant[idxTone][idxLastConsonant] == 0) return false;
-  return true;
+	if (isTone(lastCharInVowel) && isTone(lastCharInLastConsonant)) return false;
+
+	string newGvowel = gvowel;
+	string newGlconsonant = glconsonant;
+	string toneChar = "";
+
+	if (isTone(lastCharInVowel)) {
+		newGvowel.pop_back();
+		toneChar = lastCharInVowel;
+	}
+	if (isTone(lastCharInLastConsonant)) {
+		newGlconsonant.pop_back();
+		toneChar = lastCharInLastConsonant;
+	}
+	if (newGvowel.compare("uow") == 0 && newGlconsonant.length() > 0) newGvowel = "uwow";
+
+	int idxFirstConsonant = mapOfFirstConsonant[gfconsonant];
+	int idxVowel = mapOfVowel[newGvowel];
+	int idxLastConsonant = mapOfLastConsonant[newGlconsonant];
+	int idxTone = mapOfTone[toneChar];
+
+	if (combineFirstConsonantVowel[idxFirstConsonant][idxVowel] == 0) return false;
+	if (combineVowelLastConsonant[idxVowel][idxLastConsonant] == 0) return false;
+	if (combineToneLastConsonant[idxTone][idxLastConsonant] == 0) return false;
+
+	return true;
+}
+
+string wordNormalize(string gfConsonant, string gvowel, string glConsonant){
+  string res = "";
+
+  if(gvowel.length() > 0) {
+    char tone = *(--gvowel.end());
+    if(isTone(tone) == true) {
+      gvowel.pop_back();
+      glConsonant += tone;
+    }
+  }
+  res = gfConsonant + gvowel + glConsonant;
+  return res;
 }
 
 void nearlyGenerator(int firstPos, int lastPos){
@@ -463,9 +614,7 @@ void nearlyGenerator(int firstPos, int lastPos){
     for(int j = 0; j < len2; j++){
       for(int k = 0; k < len3; k++){
         if(checkValidNearlyWord(validFirstConsonant[i], validVowel[j], validLastConsonant[k])) {
-          string str = validFirstConsonant[i] + validVowel[j] + validLastConsonant[k];
-          // nearlySet.push_back(str);
-          nearlySet.insert(str);
+          nearlySet.insert(wordNormalize(validFirstConsonant[i], validVowel[j], validLastConsonant[k]));
         }
       }
     }
@@ -495,9 +644,7 @@ void nearlyGenerator(int firstPos, int lastPos){
       for(int i = 0; i < len1; i++) {
         for(int j = 0; j < len2; j++) {
           if(checkValidNearlyWord(inputFirstConsonant, validVowel[i], validLastConsonant[j])) {
-            string str = inputFirstConsonant + validVowel[i] + validLastConsonant[j];
-            // nearlySet.push_back(str);
-            nearlySet.insert(str);
+            nearlySet.insert(wordNormalize(inputFirstConsonant, validVowel[i], validLastConsonant[j]));
           }
         }
       }
@@ -525,9 +672,7 @@ void nearlyGenerator(int firstPos, int lastPos){
       for(int i = 0; i < len1; i++) {
         for(int j = 0; j < len2; j++) {
           if(checkValidNearlyWord(validFirstConsonant[i], validVowel[j], inputLastConsonant)) {
-            string str = validFirstConsonant[i] + validVowel[j] + inputLastConsonant;
-            // nearlySet.push_back(str);
-            nearlySet.insert(str);
+            nearlySet.insert(wordNormalize(validFirstConsonant[i], validVowel[j], inputLastConsonant));
           }
         }
       }
@@ -551,8 +696,7 @@ void nearlyGenerator(int firstPos, int lastPos){
       for(int i = 0; i < len1; i++) {
         if(checkValidNearlyWord(inputFirstConsonant, validVowel[i], inputLastConsonant)) {
           string str = inputFirstConsonant + validVowel[i] + inputLastConsonant;
-          // nearlySet.push_back(str);
-          nearlySet.insert(str);
+          nearlySet.insert(wordNormalize(inputFirstConsonant, validVowel[i], inputLastConsonant));
         }
       }
     }
