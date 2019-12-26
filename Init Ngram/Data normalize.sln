@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Data normalize", "Data normalize\Data normalize.vcxproj", "{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Debug|x64.ActiveCfg = Debug|x64
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Debug|x64.Build.0 = Debug|x64
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Debug|x86.ActiveCfg = Debug|Win32
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Debug|x86.Build.0 = Debug|Win32
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Release|x64.ActiveCfg = Release|x64
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Release|x64.Build.0 = Release|x64
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Release|x86.ActiveCfg = Release|Win32
+		{BDCDF817-4935-4657-BCD2-6A6CF06C5BA3}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {917F62E7-2939-4E55-BEBC-5317D6BB026D}
+	EndGlobalSection
+EndGlobal
