@@ -1,0 +1,13 @@
+﻿  CorrectSen.cpp
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(62,15): warning C4244: 'initializing': conversion from 'my_ulonglong' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(110,15): warning C4244: 'initializing': conversion from 'my_ulonglong' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(138,15): warning C4244: 'initializing': conversion from 'my_ulonglong' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(164,15): warning C4244: 'initializing': conversion from 'my_ulonglong' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(193,15): warning C4244: 'initializing': conversion from 'my_ulonglong' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(334,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(345,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(368,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(123): warning C4715: 'calcAlpha': not all control paths return a value
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(211): warning C4715: 'dbQuery': not all control paths return a value
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\CorrectSen.cpp(325): warning C4715: 'calcP': not all control paths return a value
+  Final2.vcxproj -> F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\x64\Release\Final2.exe

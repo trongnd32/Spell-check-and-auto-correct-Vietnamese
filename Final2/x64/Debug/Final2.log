@@ -1,0 +1,23 @@
+﻿  NearlySyll.cpp
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(18,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(18,36): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(41,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(42,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(71,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(83,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(86,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(103,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(111,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(120,71): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(137,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(140,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(154,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(163,71): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(301,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(302,30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(303,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(304,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(374,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(459,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\Final2\NearlySyll.cpp(735,15): warning C4244: 'initializing': conversion from 'my_ulonglong' to 'int', possible loss of data
+  Final2.vcxproj -> F:\Study\Kì 7 - BK\Xử lí ngôn ngữ tự nhiên\BTL\Final2\x64\Debug\Final2.exe
